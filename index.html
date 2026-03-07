@@ -439,6 +439,11 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:600;letter-spacing:-0.03em;mar
 .profile-placeholder{
   position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;
   justify-content:center;gap:14px;padding:32px;text-align:center;
+  width:100%;height:100%;
+}
+.profile-placeholder img{
+  width:100%;height:100%;object-fit:cover;
+  position:absolute;inset:0;
 }
 .profile-avatar{
   width:90px;height:90px;border-radius:50%;
@@ -494,7 +499,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:600;letter-spacing:-0.03em;mar
 }
 
 /* ═══════════════════════════════════════════════════════════
-   FOOTER — exact Tanish layout
+   FOOTER
 ═══════════════════════════════════════════════════════════ */
 .custom-footer{
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
@@ -523,7 +528,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:600;letter-spacing:-0.03em;mar
 .social-icons a:hover svg{color:var(--text-primary)}
 
 /* ═══════════════════════════════════════════════════════════
-   CREDITS — typewriter (exact Tanish)
+   CREDITS — typewriter
 ═══════════════════════════════════════════════════════════ */
 .credits-container{
   display:flex;justify-content:center;align-items:center;
@@ -587,9 +592,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:600;letter-spacing:-0.03em;mar
 <!-- ══════════════ NAVBAR ══════════════ -->
 <div class="taskbar__container">
   <div class="taskbar">
-    <button id="themeToggle" class="theme-toggle" ...>
-    </a>
-    <button id="themeToggle" class="theme-toggle" ...>
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle dark mode">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="theme-toggle-icon">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="moon-icon" style="display:none"></path>
         <circle cx="12" cy="12" r="5" class="sun-icon-circle"></circle>
@@ -699,9 +702,7 @@ h3{font-size:clamp(1.4rem,2.2vw,2rem);font-weight:600;letter-spacing:-0.03em;mar
   <div class="bento-box medium reveal-section delay-200">
     <div class="bento-content color-2">
       <h3>House Price Predictor</h3>
-      <p>AI-powered property valuation tool for 95+ Pune localities. Built with React, 
-Python Flask, and scikit-learn (Gradient Boosting), it delivers instant price 
-estimates with confidence intervals — deployed on GitHub Pages + Render.</p>
+      <p>AI-powered property valuation tool for 95+ Pune localities. Built with React, Python Flask, and scikit-learn (Gradient Boosting), it delivers instant price estimates with confidence intervals — deployed on GitHub Pages + Render.</p>
       <a href="https://neel-develops.github.io/House-price-predictor/" target="_blank" rel="noopener noreferrer" class="bento-button">View Project</a>
     </div>
   </div>
@@ -831,9 +832,8 @@ estimates with confidence intervals — deployed on GitHub Pages + Render.</p>
   </div>
   <div class="about_content">
     <div class="profile_image_container reveal-section delay-100">
-      <!-- Replace the div below with <img src="your-photo.jpg" class="profile_image" alt="Neel Sonawane"> -->
       <div class="profile-placeholder">
-        <a href="https://ibb.co/nNbcjrry"><img src="https://i.ibb.co/5g68LTT3/paperanimator-image.png" alt="paperanimator-image" border="0"></a>
+        <img src="https://i.ibb.co/5g68LTT3/paperanimator-image.png" alt="Neel Sonawane" class="profile_image">
       </div>
     </div>
   </div>
@@ -858,13 +858,12 @@ estimates with confidence intervals — deployed on GitHub Pages + Render.</p>
   </div>
 </section>
 
-<!-- ══════════════ FOOTER — exact Tanish layout ══════════════ -->
+<!-- ══════════════ FOOTER ══════════════ -->
 <footer class="custom-footer reveal-section">
-  <a class="email" href="mailto:neel.dev.ai@gmail.com">neel.ai.dev@gmail.com</a>
+  <a class="email" href="mailto:neel.ai.dev@gmail.com">neel.ai.dev@gmail.com</a>
   <div class="social-icons">
-    
     <!-- Instagram -->
-    <a href="https://www.instagram.com/cigsafterneel/" aria-label="Instagram">
+    <a href="https://www.instagram.com/cigsafterneel/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
       </svg>
@@ -986,10 +985,6 @@ document.addEventListener("DOMContentLoaded", function () {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("active"); });
   }, { threshold:0.05, rootMargin:"0px 0px -8% 0px" });
   revealEls.forEach(el => revealObs.observe(el));
-
-  /* ── SKILLS CAROUSEL (CSS animation — pure CSS infinite scroll) ── */
-  // The CSS animation handles it via @keyframes scrollSkills
-  // Nothing extra needed — CSS-driven
 
   /* ── TYPEWRITER CREDITS ── */
   const creditsEl   = document.getElementById("creditsText");
