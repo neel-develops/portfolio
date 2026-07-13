@@ -1,0 +1,20 @@
+# dependencies
+/node_modules
+
+# next.js
+/.next
+/out
+
+# misc
+.DS_Store
+*.pem
+npm-debug.log*
+
+# local dev artifacts
+/scratch
+neel-source.html
+
+# env files
+.env*
+.claude/
+tsconfig.tsbuildinfo
