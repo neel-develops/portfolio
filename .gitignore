@@ -18,3 +18,5 @@ neel-source.html
 .env*
 .claude/
 tsconfig.tsbuildinfo
+
+.vercel
