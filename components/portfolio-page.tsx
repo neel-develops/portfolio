@@ -1246,8 +1246,18 @@ function TerminalSandbox() {
     setInput("");
   };
 
+  const didMountRef = useRef(false);
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    // Skip the initial mount so the page doesn't auto-scroll to the terminal on load
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
+    // Scroll only inside the terminal body, never the whole page
+    const body = terminalEndRef.current?.parentElement;
+    if (body) {
+      body.scrollTop = body.scrollHeight;
+    }
   }, [history]);
 
   return (
