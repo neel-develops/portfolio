@@ -1289,7 +1289,6 @@ function TerminalSandbox() {
                 handleCommand(input);
               }
             }}
-            autoFocus
             aria-label="Terminal Input"
           />
         </div>
