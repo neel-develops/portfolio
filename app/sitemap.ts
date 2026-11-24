@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/data/projects";
 import { SITE, abs } from "@/lib/seo";
 
-const UPDATED = new Date("2026-11-25");
+// last modified = build time (never a future date)
+const UPDATED = new Date();
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const pages: MetadataRoute.Sitemap = [
