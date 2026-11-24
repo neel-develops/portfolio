@@ -1,0 +1,32 @@
+{
+  "meditwin": {
+    "team": "Spaghetti Coders",
+    "event": "MMCOE ISTE ProtoTech v2.0",
+    "members": ["Neel Sonawane", "Sanika Madrewar", "Anushka Hardikar", "Sahil Lale"]
+  },
+  "leadpilot": {
+    "team": "Spaghetti Coders",
+    "event": "Paytm AI Builder Hackathon, Pune",
+    "members": ["Neel Sonawane", "Sanika Madrewar", "Salil Nilawar"]
+  },
+  "railsync": {
+    "team": "Core Innovators",
+    "event": "Smart India Hackathon 2026",
+    "members": ["Neel Sonawane (Team Leader)", "Sahil Lale", "Sanika Madrewar", "Anushka Hardikar", "Hrishikesh Tarade", "Atharva"]
+  },
+  "prudence": {
+    "team": "Core Innovators",
+    "event": "Smart India Hackathon 2026",
+    "members": ["Neel Sonawane (Team Leader)", "Sahil Lale", "Sanika Madrewar", "Anushka Hardikar", "Hrishikesh Tarade", "Atharva"]
+  },
+  "kin": {
+    "team": "",
+    "event": "Smart India Hackathon 2026",
+    "members": ["Aayush Pawar", "Urvee Nikam", "Krishna Darekar", "Pradyumna Patil", "Neel Sonawane"]
+  },
+  "oris": {
+    "team": "ORIS",
+    "event": "NSRTC 2026 project exhibition",
+    "members": ["Neel Sonawane", "Aayush Pawar", "Shreya Jakkulwar"]
+  }
+}

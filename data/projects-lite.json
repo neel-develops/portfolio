@@ -1,0 +1,94 @@
+{
+ "meditwin": {
+  "name": "MediTwin",
+  "accent": "#0ea5a4"
+ },
+ "leadpilot": {
+  "name": "LeadPilot",
+  "accent": "#0b6bd3"
+ },
+ "ledger": {
+  "name": "Ledger",
+  "accent": "#6d4aff"
+ },
+ "natural-remedies": {
+  "name": "Natural Remedies",
+  "accent": "#3f6f2a"
+ },
+ "mr-boot-crm": {
+  "name": "MR BOOT CRM",
+  "accent": "#7a4b3a"
+ },
+ "prudence": {
+  "name": "PRUDENCE AI",
+  "accent": "#6d4aff"
+ },
+ "oris": {
+  "name": "ORIS",
+  "accent": "#2b3a8f"
+ },
+ "nostalux": {
+  "name": "Nostalux",
+  "accent": "#d9572b"
+ },
+ "nitroai": {
+  "name": "NitroAI",
+  "accent": "#7c5cff"
+ },
+ "open-cluely": {
+  "name": "Open Cluely",
+  "accent": "#222222"
+ },
+ "railsync": {
+  "name": "RailSync",
+  "accent": "#c0392b"
+ },
+ "kin": {
+  "name": "Kin",
+  "accent": "#e0567a"
+ },
+ "repomind": {
+  "name": "RepoMind",
+  "accent": "#238636"
+ },
+ "india-intern": {
+  "name": "India Intern AI",
+  "accent": "#f08a24"
+ },
+ "supportbot": {
+  "name": "SupportBot MSME",
+  "accent": "#25a05a"
+ },
+ "doc-intel": {
+  "name": "AI Document Intelligence System",
+  "accent": "#3b6fd4"
+ },
+ "anomaly": {
+  "name": "Anomaly Processing System",
+  "accent": "#d6336c"
+ },
+ "leo": {
+  "name": "Leo",
+  "accent": "#6d4aff"
+ },
+ "freelanceflow": {
+  "name": "FreelanceFlow",
+  "accent": "#0e9f8f"
+ },
+ "house": {
+  "name": "House Price Predictor",
+  "accent": "#b5651d"
+ },
+ "authenticity": {
+  "name": "Document Authenticity Scanner",
+  "accent": "#4263eb"
+ },
+ "codereview": {
+  "name": "CodeReview AI",
+  "accent": "#8a2be2"
+ },
+ "rag": {
+  "name": "RAG Knowledge Base",
+  "accent": "#0b7285"
+ }
+}

@@ -1,0 +1,61 @@
+{
+ "anomaly": [
+  "/shots/anomaly-1.jpg"
+ ],
+ "authenticity": [
+  "/shots/authenticity-1.jpg",
+  "/shots/authenticity-2.jpg"
+ ],
+ "doc-intel": [
+  "/shots/doc-intel-1.jpg",
+  "/shots/doc-intel-2.jpg"
+ ],
+ "house": [
+  "/shots/house-1.jpg",
+  "/shots/house-2.jpg"
+ ],
+ "india-intern": [
+  "/shots/india-intern-1.jpg",
+  "/shots/india-intern-2.jpg"
+ ],
+ "leadpilot": [
+  "/shots/leadpilot-1.jpg",
+  "/shots/leadpilot-2.jpg"
+ ],
+ "ledger": [
+  "/shots/ledger-1.jpg"
+ ],
+ "leo": [
+  "/shots/leo-1.jpg",
+  "/shots/leo-2.jpg"
+ ],
+ "meditwin": [
+  "/shots/meditwin-1.jpg"
+ ],
+ "natural-remedies": [
+  "/shots/natural-remedies-1.jpg",
+  "/shots/natural-remedies-2.jpg"
+ ],
+ "nitroai": [
+  "/shots/nitroai-1.jpg"
+ ],
+ "nostalux": [
+  "/shots/nostalux-1.jpg",
+  "/shots/nostalux-2.jpg"
+ ],
+ "prudence": [
+  "/shots/prudence-1.jpg",
+  "/shots/prudence-2.jpg"
+ ],
+ "railsync": [
+  "/shots/railsync-1.jpg",
+  "/shots/railsync-2.jpg"
+ ],
+ "repomind": [
+  "/shots/repomind-1.jpg"
+ ],
+ "supportbot": [
+  "/shots/supportbot-1.jpg",
+  "/shots/supportbot-2.jpg"
+ ]
+}

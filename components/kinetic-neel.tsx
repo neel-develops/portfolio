@@ -9,8 +9,8 @@ const kineticVariants = {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.08,
-        delayChildren: 0.2
+        staggerChildren: 0.05,
+        delayChildren: 0.05
       }
     }
   },
@@ -29,27 +29,12 @@ const kineticVariants = {
       transition: {
         type: "spring" as const,
         bounce: 0.35,
-        duration: 1.2,
-        delay: custom * 0.08,
+        duration: 0.7,
+        delay: custom * 0.04,
         staggerChildren: 0.05
       }
     })
   }
-};
-
-const floatVariants = {
-  initial: { y: 0, x: 0, skewY: 0 },
-  animate: (index: number) => ({
-    y: [0, -3, 2, -1, 0],
-    x: [0, 1, -2, 1, 0],
-    skewY: [0, 0.5, -0.3, 0.2, 0],
-    transition: {
-      duration: 5 + index * 0.3,
-      repeat: Infinity,
-      ease: "easeInOut" as const,
-      delay: index * 0.15
-    }
-  })
 };
 
 export function KineticNeel() {
@@ -87,19 +72,7 @@ export function KineticNeel() {
             position: "relative"
           }}
         >
-          <motion.span
-            className="kinetic-letter-inner"
-            variants={floatVariants}
-            initial="initial"
-            animate="animate"
-            custom={index}
-            style={{
-              display: "inline-block",
-              position: "relative"
-            }}
-          >
-            {letter}
-          </motion.span>
+          <span className="kinetic-letter-inner" style={{ display: "inline-block", position: "relative" }}>{letter}</span>
         </motion.span>
       ))}
     </motion.h1>

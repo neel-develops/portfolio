@@ -2,52 +2,21 @@
 
 import { useEffect, useMemo, useState, useRef } from "react";
 import { motion } from "framer-motion";
-import emailjs from "@emailjs/browser";
+import Link from "next/link";
+import Image from "next/image";
 
 import { SplitText } from "@/components/split-text";
 import { KineticNeel } from "@/components/kinetic-neel";
+import { useContact } from "@/components/site/shell";
+import { IntroReveal } from "@/components/home/intro-reveal";
+import { SelectedWork } from "@/components/home/selected-work";
+import { MacDesktop } from "@/components/home/mac-desktop";
+import { SkillsAssemble } from "@/components/home/skills-assemble";
+import { CraftRail } from "@/components/home/craft-rail";
+import { ExperienceLine } from "@/components/home/experience-line";
+import { ContactBlock } from "@/components/home/contact-block";
+import { projects } from "@/data/projects";
 import { portfolioData } from "@/data/portfolio";
-
-const EMAILJS_PUBLIC_KEY = "0_skvr2XAjtCQ-v8X";
-const EMAILJS_SERVICE_ID = "service_ag7cvgm";
-const EMAILJS_TEMPLATE_ID = "template_4bsb9ct";
-
-function useLocalTime() {
-  const [time, setTime] = useState("");
-
-  useEffect(() => {
-    const update = () => {
-      setTime(
-        new Intl.DateTimeFormat("en-US", {
-          hour: "numeric",
-          minute: "2-digit",
-          second: "2-digit",
-          hour12: true
-        }).format(new Date())
-      );
-    };
-
-    update();
-    const interval = setInterval(update, 1000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return time;
-}
-
-function SparkIcon() {
-  return (
-    <svg className="spark-icon" viewBox="0 0 12 12" aria-hidden="true">
-      <path
-        d="M1.5 6C4.634 6 6 4.6815 6 1.5C6 4.6815 7.3565 6 10.5 6C7.3565 6 6 7.3565 6 10.5C6 7.3565 4.634 6 1.5 6Z"
-        fill="currentColor"
-        stroke="currentColor"
-        strokeWidth="0.5"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function CrossIcon() {
   return (
@@ -75,171 +44,17 @@ function ArrowLinkIcon() {
   );
 }
 
-function GlobeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <circle
-        cx="12"
-        cy="12"
-        r="10"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-      />
-      <path
-        d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function BriefcaseIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
-      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
-    </svg>
-  );
-}
 
 export function PortfolioPage() {
-  const time = useLocalTime();
-  const [isContactOpen, setIsContactOpen] = useState(false);
-  const [activeProject, setActiveProject] = useState<any | null>(null);
+  const { open: openContactModal } = useContact();
   const [activeCertificate, setActiveCertificate] = useState<any | null>(null);
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
-  const [formState, setFormState] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
 
-  const openContactModal = () => {
-    setFormState('idle');
-    setIsContactOpen(true);
-  };
-
-  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    const data = new FormData(form);
-    setFormState('sending');
-
-    try {
-      await emailjs.send(
-        EMAILJS_SERVICE_ID,
-        EMAILJS_TEMPLATE_ID,
-        {
-          name: data.get('name'),
-          email: data.get('email'),
-          title: data.get('subject'),
-          message: data.get('message')
-        },
-        { publicKey: EMAILJS_PUBLIC_KEY }
-      );
-
-      setFormState('success');
-      form.reset();
-      setTimeout(() => {
-        setIsContactOpen(false);
-        setFormState('idle');
-      }, 2200);
-    } catch (err) {
-      console.error('EmailJS error:', err);
-      setFormState('error');
-    }
-  };
-
-  useEffect(() => {
-    const saved = localStorage.getItem("theme") as 'light' | 'dark';
-    if (saved) {
-      setTheme(saved);
-    }
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.className = theme === 'dark' ? 'dark-theme' : '';
-    localStorage.setItem("theme", theme);
-  }, [theme]);
-  const marqueeSkills = useMemo(
-    () => [...portfolioData.skills, ...portfolioData.skills],
-    []
-  );
   const featuredStrip = useMemo(
-    () => [...portfolioData.projects, ...portfolioData.projects],
+    () => [...projects, ...projects],
     []
   );
-  const statementColumns = useMemo(
-    () => [
-      portfolioData.statements.slice(0, 2),
-      portfolioData.statements.slice(2, 4),
-      portfolioData.statements.slice(4, 6)
-    ],
-    []
-  );
-  const learningColumns = useMemo(
-    () => [
-      portfolioData.learnings.slice(0, 2),
-      portfolioData.learnings.slice(2, 4),
-      portfolioData.learnings.slice(4, 6)
-    ],
-    []
-  );
-  const certificationPairs = useMemo(
-    () => [
-      portfolioData.certifications.slice(0, 2),
-      portfolioData.certifications.slice(2, 4)
-    ],
-    []
-  );
-
-
   return (
-    <main className="portfolio-shell">
-      <div className="reference-root">
-        <header className="top-nav">
-          <div className="brand-lockup">
-            <span className="brand-mark">NS</span>
-            <SparkIcon />
-            <span className="brand-tag">AI</span>
-          </div>
-
-          <button
-            className="nav-connect-btn"
-            onClick={openContactModal}
-            style={{ border: "none", background: "none", cursor: "pointer" }}
-          >
-            <span className="connect-pulse" />
-            <span>Lets Connect</span>
-          </button>
-
-          <div className="nav-actions">
-            <button
-              className="theme-toggle-btn"
-              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-              aria-label="Toggle dark mode"
-            >
-              {theme === 'light' ? (
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="5" />
-                  <line x1="12" y1="1" x2="12" y2="3" />
-                  <line x1="12" y1="21" x2="12" y2="23" />
-                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-                  <line x1="1" y1="12" x2="3" y2="12" />
-                  <line x1="21" y1="12" x2="23" y2="12" />
-                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
-                </svg>
-              )}
-            </button>
-          </div>
-        </header>
+    <>
 
         <section className="hero-section">
           {/* Background Liquid Blobs */}
@@ -252,13 +67,13 @@ export function PortfolioPage() {
                 className="profile-card"
                 initial={{ opacity: 0.001 }}
                 animate={{ opacity: 1 }}
-                transition={{ type: "spring", bounce: 0.5, duration: 2, delay: 1.5 }}
+                transition={{ type: "spring", bounce: 0.3, duration: 0.8, delay: 0.15 }}
               >
                 <motion.div
                   className="profile-stack"
                   initial={{ opacity: 0.001, x: 150 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ type: "spring", bounce: 0.2, duration: 3 }}
+                  transition={{ type: "spring", bounce: 0.2, duration: 1 }}
                 >
                   <div className="avatar-shell">
                     <div className="avatar-cut avatar-cut-1">
@@ -324,7 +139,7 @@ export function PortfolioPage() {
                     className="hero-side-meta"
                     initial={{ opacity: 0.001 }}
                     animate={{ opacity: 1 }}
-                    transition={{ type: "spring", bounce: 0.2, duration: 2 }}
+                    transition={{ type: "spring", bounce: 0.2, duration: 0.8 }}
                   >
                     <p>{portfolioData.hero.experienceStat}</p>
                     <p className="local-stat-red"><em><strong>{portfolioData.hero.localStat}</strong></em></p>
@@ -337,87 +152,60 @@ export function PortfolioPage() {
           </div>
         </section>
 
-        <section className="projects-section dark-surface">
-          <div className="section-title-lockup">
-            <SplitText as="p" text="featured work" className="script-heading on-dark" />
-            <SplitText as="h2" text="projects" className="section-mega on-dark" />
-          </div>
+        <IntroReveal />
 
-          <div className="featured-projects-grid">
-            {portfolioData.projects.slice(0, 3).map((project, index) => (
-              <motion.a
-                key={`${project.title}-${index}`}
-                href={project.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`featured-project-card ${
-                  index === 1 ? "featured-project-card-tall" : ""
-                }`}
-                initial={{ opacity: 0, y: 150 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  type: "spring",
-                  bounce: 0.22,
-                  duration: 1.1,
-                  delay: index * 0.08
-                }}
-              >
-                <div className={`project-cover project-cover-${index + 1}`}>
-                  <div className="project-cover-overlay" />
-                  <div className="project-cover-mark">
-                    <CrossIcon />
-                    <span>{project.tags[0]}</span>
-                  </div>
-                </div>
-                <div className="project-copy">
-                  <p className="project-title">{project.title}</p>
-                  <p className="project-description">{project.description}</p>
-                </div>
-              </motion.a>
-            ))}
-          </div>
-        </section>
+        <SelectedWork />
 
         <section className="design-strip-section">
           <div className="mini-header">
             <span>// Featured Builds</span>
             <a
-              href={portfolioData.contact.github}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/work"
             >
               View all
             </a>
           </div>
 
           <div className="showcase-strip">
-            <div className="showcase-track">
+            <div
+              className="showcase-track"
+              style={{ ["--n" as string]: portfolioData.projects.length }}
+            >
               {featuredStrip.map((project, index) => (
-                <div
-                  key={`${project.title}-${index}`}
+                <Link
+                  key={`${project.slug}-${index}`}
+                  href={`/work/${project.slug}`}
                   className="showcase-item cursor-pointer"
-                  onClick={() => setActiveProject(project)}
+                  aria-hidden={index >= projects.length}
+                  tabIndex={index >= projects.length ? -1 : undefined}
                 >
                   <div className="showcase-frame">
                     <div className="showcase-thumbnail">
                       <div className="showcase-thumbnail-inner">
-                        <span className="showcase-thumbnail-title">{project.title}</span>
-                        <span className="showcase-thumbnail-subtitle">
-                          {project.tags.slice(0, 2).join(" · ")}
-                        </span>
+                        <Image
+                          src={project.mock.frontSm}
+                          alt={`${project.name} app on iPhone`}
+                          width={170}
+                          height={350}
+                          className="showcase-phone"
+                          sizes="170px"
+                        />
                       </div>
                     </div>
                     <div className="showcase-meta">
-                      <span>{project.title}</span>
-                      <span>AI</span>
+                      <span>{project.name}</span>
+                      <span>{project.category}</span>
                     </div>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
         </section>
+
+        <MacDesktop />
+
+        <SkillsAssemble />
 
         <section className="experience-section dark-surface">
           <div className="section-title-center">
@@ -425,30 +213,7 @@ export function PortfolioPage() {
             <SplitText as="h2" text="Work Experience" className="section-mega on-dark" style={{ fontSize: "80px", lineHeight: "80px" }} />
           </div>
 
-          <div className="experience-list">
-            {portfolioData.experience.map((exp, index) => (
-              <motion.div
-                key={`${exp.role}-${index}`}
-                className="experience-card"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1], delay: index * 0.05 }}
-              >
-                <div className="experience-main">
-                  <div className="experience-icon">
-                    <BriefcaseIcon />
-                  </div>
-                  <div className="experience-copy">
-                    <p className="experience-title">{exp.role}</p>
-                    <p className="experience-company">{exp.company}</p>
-                    <p className="experience-description">{exp.description}</p>
-                  </div>
-                </div>
-                <span className="experience-date">{exp.period}</span>
-              </motion.div>
-            ))}
-          </div>
+          <ExperienceLine />
 
           <div className="achievements-section">
             <div className="section-title-center">
@@ -546,52 +311,9 @@ export function PortfolioPage() {
             </div>
           </div>
 
-          <div className="section-title-center second-block">
-            <SplitText as="p" text="learning journey" className="script-heading on-dark" />
-            <SplitText as="h2" text="recent learnings" className="section-mega on-dark" />
-          </div>
-
-          <div className="statement-columns">
-            {learningColumns.map((column, columnIndex) => (
-              <div key={`learning-column-${columnIndex}`} className="statement-column">
-                {column.map((learning, learningIndex) => (
-                  <motion.div
-                    key={`${learning.title}-${learningIndex}`}
-                    className="statement-card"
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{
-                      duration: 0.55,
-                      ease: [0.22, 1, 0.36, 1],
-                      delay: (columnIndex + learningIndex) * 0.06
-                    }}
-                  >
-                    <div className="statement-head">
-                      <div className="statement-avatar">
-                        <img src={portfolioData.hero.profileImage} alt="" />
-                      </div>
-                      <div>
-                        <p className="statement-title">{learning.title}</p>
-                        <p className="statement-meta">Currently Exploring</p>
-                      </div>
-                    </div>
-                    <p className="statement-body">
-                      {learning.body.split(learning.accent).map((part, index, parts) => (
-                        <span key={`${learning.title}-${index}`}>
-                          {part}
-                          {index < parts.length - 1 ? (
-                            <strong>{learning.accent}</strong>
-                          ) : null}
-                        </span>
-                      ))}
-                    </p>
-                  </motion.div>
-                ))}
-              </div>
-            ))}
-          </div>
         </section>
+
+        <CraftRail />
 
         <section className="about-section">
           <div className="about-header">
@@ -636,280 +358,10 @@ export function PortfolioPage() {
           </div>
         </section>
 
-        <footer className="footer-section dark-footer">
-          <div className="footer-visual">
-            <div className="footer-video-wrap">
-              <video
-                className="footer-video"
-                src="/footer-gradient.mp4"
-                autoPlay
-                loop
-                muted
-                playsInline
-              />
-              <div className="footer-video-overlay" />
-            </div>
+        <ContactBlock />
 
-            <div className="footer-border-line" />
-            <svg className="footer-shape footer-shape-center" viewBox="-1 -1 569 602" aria-hidden="true">
-              <path
-                d="M283.878 149.808V0H567V149.808C567 232.56 503.606 299.616 425.439 299.616C347.272 299.616 283.878 232.56 283.878 149.808ZM283.122 149.808V299.616H0V0H141.561C219.728 0 283.122 67.0565 283.122 149.808ZM425.439 300.384H567V600H425.439C347.272 600 283.878 532.943 283.878 450.192V300.384H425.439ZM283.122 450.192V600H0V450.192C0 367.44 63.3936 300.384 141.561 300.384C219.728 300.384 283.122 367.44 283.122 450.192Z"
-                fill="rgba(255,255,255,0.01)"
-                stroke="#262626"
-                strokeWidth="1.00751"
-              />
-            </svg>
-            <svg className="footer-shape footer-shape-left" viewBox="-1 -1 569 602" aria-hidden="true">
-              <path
-                d="M283.878 149.808V0H567V149.808C567 232.56 503.606 299.616 425.439 299.616C347.272 299.616 283.878 232.56 283.878 149.808ZM283.122 149.808V299.616H0V0H141.561C219.728 0 283.122 67.0565 283.122 149.808ZM425.439 300.384H567V600H425.439C347.272 600 283.878 532.943 283.878 450.192V300.384H425.439ZM283.122 450.192V600H0V450.192C0 367.44 63.3936 300.384 141.561 300.384C219.728 300.384 283.122 367.44 283.122 450.192Z"
-                fill="rgba(255,255,255,0.01)"
-                stroke="#262626"
-                strokeWidth="1.00751"
-              />
-            </svg>
-            <svg className="footer-shape footer-shape-right" viewBox="-1 -1 569 602" aria-hidden="true">
-              <path
-                d="M283.878 149.808V0H567V149.808C567 232.56 503.606 299.616 425.439 299.616C347.272 299.616 283.878 232.56 283.878 149.808ZM283.122 149.808V299.616H0V0H141.561C219.728 0 283.122 67.0565 283.122 149.808ZM425.439 300.384H567V600H425.439C347.272 600 283.878 532.943 283.878 450.192V300.384H425.439ZM283.122 450.192V600H0V450.192C0 367.44 63.3936 300.384 141.561 300.384C219.728 300.384 283.122 367.44 283.122 450.192Z"
-                fill="rgba(255,255,255,0.01)"
-                stroke="#262626"
-                strokeWidth="1.00751"
-              />
-            </svg>
-            <div className="footer-glow" />
 
-            <div className="footer-content">
-              <SplitText as="p" text="lets build something" className="script-heading on-dark footer-script" />
-              <SplitText
-                as="p"
-                text="Always curious about how things work"
-                className="footer-heading"
-              />
-
-              <div className="footer-actions">
-                <a
-                  className="footer-email"
-                  href={`mailto:${portfolioData.contact.email}`}
-                >
-                  {portfolioData.contact.email}
-                </a>
-                <button
-                  className="footer-button"
-                  onClick={openContactModal}
-                  style={{ border: "none", cursor: "pointer" }}
-                >
-                  Lets Connect
-                </button>
-              </div>
-
-              <div className="footer-embed">
-                <iframe
-                  data-testid="embed-iframe"
-                  style={{ borderRadius: "12px" }}
-                  src="https://open.spotify.com/embed/track/4jkYkvbjEuckbJs6Ts60Hk?utm_source=generator"
-                  width="100%"
-                  height="152"
-                  frameBorder="0"
-                  allowFullScreen
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-          </div>
- 
-          <div className="footer-meta">
-            <div className="footer-socials">
-              <a
-                href={portfolioData.contact.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-              >
-                in
-              </a>
-              <a
-                href={portfolioData.contact.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-              >
-                gh
-              </a>
-              <a
-                href="https://x.com/neel-develops"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X/Twitter"
-                className="x-link"
-              >
-                <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-            </div>
-
-            <div className="footer-typewriter-wrap">
-              <div className="typewriter-badge">
-                <span>&lt; Code By Neel /&gt;</span>
-                <span className="typewriter-cursor">|</span>
-              </div>
-            </div>
- 
-            <SplitText
-              as="p"
-              text="© 2026 Portfolio - Neel Sonawane"
-              className="footer-copyright"
-            />
-          </div>
-        </footer>
-
-        {/* Contact Form Modal */}
-        {isContactOpen && (
-          <div className="modal-overlay" onClick={() => setIsContactOpen(false)}>
-            <motion.div
-              className="modal-box"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
-              {/* Background Gradient Video */}
-              <div className="modal-video-wrap">
-                <video
-                  className="modal-video"
-                  src="/footer-gradient.mp4"
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                />
-                <div className="modal-video-overlay" />
-              </div>
-
-              <div className="modal-header">
-                <h3 className="modal-title">Send me a message</h3>
-                <button className="modal-close" onClick={() => setIsContactOpen(false)} aria-label="Close modal">
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor">
-                    <path d="M18 6L6 18M6 6l12 12" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </button>
-              </div>
-
-              <form className="modal-form" onSubmit={handleContactSubmit}>
-                <div className="form-group">
-                  <label htmlFor="modal-name">Your Name</label>
-                  <input type="text" id="modal-name" name="name" placeholder="e.g., John Doe" required />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="modal-email">Your Email</label>
-                  <input type="email" id="modal-email" name="email" placeholder="e.g., you@example.com" required />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="modal-subject">Subject</label>
-                  <input type="text" id="modal-subject" name="subject" placeholder="What's this about?" required />
-                </div>
-
-                <div className="form-group">
-                  <label htmlFor="modal-message">Message</label>
-                  <textarea id="modal-message" name="message" rows={4} placeholder="Your message here..." required></textarea>
-                </div>
-
-                <button type="submit" className="form-submit" disabled={formState === 'sending'}>
-                  {formState === 'sending' ? 'Sending...' : 'Send Message'}
-                </button>
-
-                <div
-                  className={`form-status${formState === 'success' ? ' success' : formState === 'error' ? ' error' : ''}`}
-                  role="alert"
-                >
-                  {formState === 'success'
-                    ? "✓ Message sent! I'll get back to you soon."
-                    : formState === 'error'
-                    ? "✗ Couldn't send right now. Email me directly at neel.ai.dev@gmail.com"
-                    : ''}
-                </div>
-              </form>
-            </motion.div>
-          </div>
-        )}
-
-        {/* Project Details Modal */}
-        {activeProject && (
-          <div className="modal-overlay" onClick={() => setActiveProject(null)}>
-            <motion.div
-              className="project-details-modal"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.95, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ type: "spring", stiffness: 300, damping: 25 }}
-            >
-              <div className="modal-header">
-                <div>
-                  <span className="achievement-badge" style={{ marginBottom: "6px", display: "inline-block" }}>Featured Work</span>
-                  <h3 className="modal-title" style={{ fontSize: "28px" }}>{activeProject.title}</h3>
-                </div>
-                <button className="modal-close" onClick={() => setActiveProject(null)} aria-label="Close modal">
-                  <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor">
-                    <path d="M18 6L6 18M6 6l12 12" strokeWidth="2" strokeLinecap="round"/>
-                  </svg>
-                </button>
-              </div>
-
-              <div className="modal-grid">
-                <div className="modal-meta-info">
-                  <div className="modal-project-desc">
-                    {activeProject.description}
-                  </div>
-                  
-                  <div className="modal-divider" />
-                  
-                  <div className="modal-input-group">
-                    <span className="modal-details-label" style={{ marginBottom: "8px", display: "block" }}>Technologies Used</span>
-                    <div className="modal-tags-flex">
-                      {activeProject.tags.map((tag: string) => (
-                        <span key={tag} className="modal-tag">{tag}</span>
-                      ))}
-                    </div>
-                  </div>
-                  
-                  <div className="modal-divider" />
-                  
-                  <div className="modal-details-grid">
-                    <span className="modal-details-label">Role</span>
-                    <span className="modal-details-val">Lead AI Engineer</span>
-                    
-                    <span className="modal-details-label">Type</span>
-                    <span className="modal-details-val">Open Source Systems</span>
-                    
-                    <span className="modal-details-label">Scale</span>
-                    <span className="modal-details-val">High-Performance Core</span>
-                  </div>
-                  
-                  <div className="modal-divider" style={{ marginTop: "auto" }} />
-                  
-                  <a
-                    href={activeProject.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="modal-link-btn"
-                  >
-                    <span>Inspect Codebase</span>
-                    <ArrowLinkIcon />
-                  </a>
-                </div>
-
-                <div className="project-screens-container">
-                  <span className="modal-details-label">App Screens & Interaction</span>
-                  <ProjectScreens project={activeProject} />
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-
-        {/* Certificate Preview Modal */}
+        {/* Certificate Preview Modal */}        {/* Certificate Preview Modal */}
         {activeCertificate && (
           <div className="modal-overlay" onClick={() => setActiveCertificate(null)}>
             <motion.div
@@ -963,201 +415,7 @@ export function PortfolioPage() {
             </motion.div>
           </div>
         )}
-      </div>
-    </main>
-  );
-}
-
-function ProjectScreens({ project }: { project: any }) {
-  const [activeTab, setActiveTab] = useState<"dashboard" | "ui" | "logs">("dashboard");
-  const [logs, setLogs] = useState<string[]>([]);
-  const [activeMetric, setActiveMetric] = useState(42);
-  const [iframeLoading, setIframeLoading] = useState(true);
-
-  // Check if we can embed the project URL in an iframe
-  const isFrameable = project.href && (
-    project.href.includes("github.io") || 
-    project.href.includes("vercel.app") || 
-    project.href.includes("netlify.app") ||
-    project.href.includes("herokuapp.com") ||
-    project.href.includes("localhost")
-  );
-
-  // Re-initialize state when project changes
-  useEffect(() => {
-    setIframeLoading(true);
-    setLogs([
-      "System initialized successfully.",
-      "Connection established with secure endpoint.",
-      `Model loaded: ${project.tags[0] || "GPT-4"}`,
-      "Ready to accept live streaming queries."
-    ]);
-  }, [project]);
-
-  // Handle typing interval for dashboard load metric and log streaming
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setLogs(prev => [
-        ...prev.slice(-3),
-        `Event logged at ${new Date().toLocaleTimeString()} - Status OK`
-      ]);
-      setActiveMetric(Math.floor(Math.random() * 30) + 70);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [project]);
-
-  return (
-    <div className="project-screens-container">
-      <div className="screen-tabs">
-        <button className={activeTab === "dashboard" ? "active" : ""} onClick={() => setActiveTab("dashboard")}>Dashboard</button>
-        <button className={activeTab === "ui" ? "active" : ""} onClick={() => setActiveTab("ui")}>Live Preview</button>
-        <button className={activeTab === "logs" ? "active" : ""} onClick={() => setActiveTab("logs")}>Console Logs</button>
-      </div>
-      <div className="mockup-frame">
-        <div className="mockup-header">
-          <div className="mockup-dots"><span/><span/><span/></div>
-          <div className="mockup-address">{project.href || `localhost:3000/${project.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}</div>
-        </div>
-        <div 
-          className={`mockup-viewport ${activeTab === "ui" && isFrameable ? "viewport-full" : ""}`}
-          style={{ position: "relative" }}
-        >
-          {activeTab === "dashboard" && (
-            <div className="mock-dash">
-              <div className="mock-widgets">
-                <div className="mock-widget">
-                  <span className="widget-label">System Load</span>
-                  <span className="widget-value">{activeMetric}%</span>
-                  <div className="widget-bar"><div style={{ width: `${activeMetric}%` }}/></div>
-                </div>
-                <div className="mock-widget">
-                  <span className="widget-label">Response Time</span>
-                  <span className="widget-value">124ms</span>
-                  <div className="widget-bar"><div style={{ width: "24%", backgroundColor: "#ff334b" }}/></div>
-                </div>
-              </div>
-              <div className="mock-chart-box">
-                <span className="widget-label">Realtime Traffic Stream</span>
-                <div className="mock-chart-bars">
-                  {[45, 60, 55, 70, 65, 80, 75, 90, 85, 95, 88, 100].map((h, i) => (
-                    <div key={i} className="chart-bar-col" style={{ height: `${h}%` }} />
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
-          {activeTab === "ui" && (
-            <div className="mock-ui" style={{ height: "100%", width: "100%" }}>
-              {isFrameable ? (
-                <div style={{ width: "100%", height: "100%", position: "relative" }}>
-                  {iframeLoading && (
-                    <div style={{
-                      position: "absolute",
-                      inset: 0,
-                      background: "#080808",
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      gap: "12px",
-                      zIndex: 5
-                    }}>
-                      <span className="spinner" style={{ 
-                        width: "24px", 
-                        height: "24px", 
-                        border: "3px solid rgba(255,255,255,0.1)", 
-                        borderTop: "3px solid var(--accent)", 
-                        borderRadius: "50%", 
-                        display: "inline-block", 
-                        animation: "spin 0.8s linear infinite" 
-                      }}/>
-                      <span style={{ fontSize: "11px", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", letterSpacing: "0.05em" }}>
-                        Connecting to live deployment...
-                      </span>
-                    </div>
-                  )}
-                  <iframe 
-                    src={project.href} 
-                    title={project.title}
-                    onLoad={() => setIframeLoading(false)}
-                    style={{ 
-                      width: "100%", 
-                      height: "100%", 
-                      border: "none", 
-                      background: "white"
-                    }}
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                  />
-                </div>
-              ) : (
-                <div style={{ 
-                  display: "flex", 
-                  flexDirection: "column", 
-                  alignItems: "center", 
-                  justifyContent: "center", 
-                  height: "100%", 
-                  padding: "20px", 
-                  textAlign: "center",
-                  gap: "16px"
-                }}>
-                  <div style={{ 
-                    width: "48px", 
-                    height: "48px", 
-                    borderRadius: "50%", 
-                    background: "rgba(255, 255, 255, 0.03)", 
-                    border: "1px solid rgba(255, 255, 255, 0.05)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "var(--accent)"
-                  }}>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
-                      <path d="M9 18c-4.51 2-5-2-7-2" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 style={{ fontSize: "14px", color: "white", marginBottom: "4px", fontWeight: "600" }}>Codebase & Backend Integration</h4>
-                    <p style={{ fontSize: "11px", color: "rgba(255,255,255,0.5)", maxWidth: "260px", margin: "0 auto", lineHeight: "1.4" }}>
-                      This project operates as a command-line script, AI API backend, or serverless service. 
-                    </p>
-                  </div>
-                  <a 
-                    href={project.href} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="mock-action-btn"
-                    style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      gap: "6px",
-                      background: "white",
-                      color: "black",
-                      textDecoration: "none",
-                      fontSize: "12px",
-                      fontWeight: "600",
-                      borderRadius: "8px",
-                      padding: "8px 16px"
-                    }}
-                  >
-                    Inspect GitHub Repository ↗
-                  </a>
-                </div>
-              )}
-            </div>
-          )}
-          {activeTab === "logs" && (
-            <div className="mock-logs">
-              {logs.map((log, i) => (
-                <div key={i} className="log-line">
-                  <span className="log-time">[{new Date().toLocaleTimeString()}]</span> {log}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+    </>
   );
 }
 
@@ -1180,7 +438,8 @@ function TerminalSandbox() {
       "  clear        - Clear the terminal console"
     ],
     about: [
-      "Candidate Name: Neel Sonawane",
+      "Name: Neel Sonawane",
+      "Now: AI & Digital Transformation team @ VSQC Pvt. Ltd.",
       "Role: AI Developer & Agentic Systems Explorer",
       "Mission: Building intelligence across agents, automation, and full-stack software.",
       "Base: Pune, India"
@@ -1448,7 +707,7 @@ function DeveloperOS() {
           </div>
           <div className="dev-os-card-body">
             <div className="dev-os-large-value">
-              <CountUp end={1500} suffix="+" />
+              <CountUp end={500} suffix="+" />
             </div>
             <p className="dev-os-large-label">Commits</p>
             <GithubContributionGraph />
@@ -1499,9 +758,9 @@ function DeveloperOS() {
             <span className="dev-os-card-title">Experience</span>
           </div>
           <div className="dev-os-card-body">
-            <div className="dev-os-experience-role">AI Intern</div>
+            <div className="dev-os-experience-role">AI &amp; Digital Transformation</div>
             <div className="dev-os-experience-company">@ VSQC Pvt. Ltd.</div>
-            <div className="dev-os-experience-duration">June 2026 - Present</div>
+            <div className="dev-os-experience-duration">Aug 2026 - Present · Team member</div>
           </div>
           <div className="dev-os-card-footer">
             Building intelligent solutions and automated workflows
@@ -1521,20 +780,20 @@ function DeveloperOS() {
             <span className="dev-os-card-title">Current Focus</span>
           </div>
           <div className="dev-os-card-body">
-            <div className="dev-os-large-value glow-text">Friday OS</div>
-            <p className="dev-os-focus-desc">Agentic AI</p>
+            <div className="dev-os-large-value glow-text">Vision QC</div>
+            <p className="dev-os-focus-desc">Explainable AI quality inspection</p>
             <div className="dev-os-pulse-badge">
               <span className="pulse-dot" />
-              <span>Active Sprint</span>
+              <span>Capstone · Active Sprint</span>
             </div>
           </div>
           <div className="dev-os-card-footer">
-            AI-powered agentic platform
+            Real-time defect detection for smart manufacturing
           </div>
         </div>
         <div className="dev-os-card-hover-insight">
           <div className="insight-badge">Insight</div>
-          <p className="insight-text">Next-gen desktop automation &amp; agentic workflows active</p>
+          <p className="insight-text">Friday OS is shipped. Now training and explaining defect-detection models for Vision QC.</p>
         </div>
       </motion.div>
 

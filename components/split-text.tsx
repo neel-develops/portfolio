@@ -6,7 +6,7 @@ const containerVariants: Variants = {
   hidden: {},
   visible: {
     transition: {
-      staggerChildren: 0.03
+      staggerChildren: 0.008
     }
   }
 };
@@ -14,15 +14,15 @@ const containerVariants: Variants = {
 const charVariants: Variants = {
   hidden: {
     opacity: 0.001,
-    y: 10,
-    filter: "blur(10px)"
+    y: 6,
+    filter: "blur(6px)"
   },
   visible: {
     opacity: 1,
     y: 0,
     filter: "blur(0px)",
     transition: {
-      duration: 0.45,
+      duration: 0.3,
       ease: [0.22, 1, 0.36, 1]
     }
   }
@@ -54,7 +54,7 @@ export function SplitText({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once, amount: 0.6 }}
+      viewport={{ once, amount: 0.15 }}
     >
       {words.map((word, wordIndex) => (
         <span key={`${word}-${wordIndex}`} className="split-word">

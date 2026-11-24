@@ -20,3 +20,6 @@ neel-source.html
 tsconfig.tsbuildinfo
 
 .vercel
+
+# review assets (kept local, not deployed)
+/review

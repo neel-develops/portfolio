@@ -1,0 +1,197 @@
+{
+ "meditwin": {
+  "front": [
+   "/mockups/meditwin-front-1.webp"
+  ],
+  "frontSm": "/mockups/meditwin-front-sm.webp",
+  "tilt": "/mockups/meditwin-tilt.webp",
+  "real": true
+ },
+ "leadpilot": {
+  "front": [
+   "/mockups/leadpilot-front-1.webp",
+   "/mockups/leadpilot-front-2.webp"
+  ],
+  "frontSm": "/mockups/leadpilot-front-sm.webp",
+  "tilt": "/mockups/leadpilot-tilt.webp",
+  "real": true
+ },
+ "ledger": {
+  "front": [
+   "/mockups/ledger-front-1.webp"
+  ],
+  "frontSm": "/mockups/ledger-front-sm.webp",
+  "tilt": "/mockups/ledger-tilt.webp",
+  "real": true
+ },
+ "natural-remedies": {
+  "front": [
+   "/mockups/natural-remedies-front-1.webp",
+   "/mockups/natural-remedies-front-2.webp"
+  ],
+  "frontSm": "/mockups/natural-remedies-front-sm.webp",
+  "tilt": "/mockups/natural-remedies-tilt.webp",
+  "real": true
+ },
+ "mr-boot-crm": {
+  "front": [
+   "/mockups/mr-boot-crm-front-1.webp"
+  ],
+  "frontSm": "/mockups/mr-boot-crm-front-sm.webp",
+  "tilt": "/mockups/mr-boot-crm-tilt.webp",
+  "real": false
+ },
+ "prudence": {
+  "front": [
+   "/mockups/prudence-front-1.webp",
+   "/mockups/prudence-front-2.webp"
+  ],
+  "frontSm": "/mockups/prudence-front-sm.webp",
+  "tilt": "/mockups/prudence-tilt.webp",
+  "real": true
+ },
+ "oris": {
+  "front": [
+   "/mockups/oris-front-1.webp"
+  ],
+  "frontSm": "/mockups/oris-front-sm.webp",
+  "tilt": "/mockups/oris-tilt.webp",
+  "real": false
+ },
+ "nostalux": {
+  "front": [
+   "/mockups/nostalux-front-1.webp",
+   "/mockups/nostalux-front-2.webp"
+  ],
+  "frontSm": "/mockups/nostalux-front-sm.webp",
+  "tilt": "/mockups/nostalux-tilt.webp",
+  "real": true
+ },
+ "nitroai": {
+  "front": [
+   "/mockups/nitroai-front-1.webp"
+  ],
+  "frontSm": "/mockups/nitroai-front-sm.webp",
+  "tilt": "/mockups/nitroai-tilt.webp",
+  "real": true
+ },
+ "open-cluely": {
+  "front": [
+   "/mockups/open-cluely-front-1.webp"
+  ],
+  "frontSm": "/mockups/open-cluely-front-sm.webp",
+  "tilt": "/mockups/open-cluely-tilt.webp",
+  "real": false
+ },
+ "railsync": {
+  "front": [
+   "/mockups/railsync-front-1.webp",
+   "/mockups/railsync-front-2.webp"
+  ],
+  "frontSm": "/mockups/railsync-front-sm.webp",
+  "tilt": "/mockups/railsync-tilt.webp",
+  "real": true
+ },
+ "kin": {
+  "front": [
+   "/mockups/kin-front-1.webp"
+  ],
+  "frontSm": "/mockups/kin-front-sm.webp",
+  "tilt": "/mockups/kin-tilt.webp",
+  "real": false
+ },
+ "repomind": {
+  "front": [
+   "/mockups/repomind-front-1.webp"
+  ],
+  "frontSm": "/mockups/repomind-front-sm.webp",
+  "tilt": "/mockups/repomind-tilt.webp",
+  "real": true
+ },
+ "india-intern": {
+  "front": [
+   "/mockups/india-intern-front-1.webp",
+   "/mockups/india-intern-front-2.webp"
+  ],
+  "frontSm": "/mockups/india-intern-front-sm.webp",
+  "tilt": "/mockups/india-intern-tilt.webp",
+  "real": true
+ },
+ "supportbot": {
+  "front": [
+   "/mockups/supportbot-front-1.webp",
+   "/mockups/supportbot-front-2.webp"
+  ],
+  "frontSm": "/mockups/supportbot-front-sm.webp",
+  "tilt": "/mockups/supportbot-tilt.webp",
+  "real": true
+ },
+ "doc-intel": {
+  "front": [
+   "/mockups/doc-intel-front-1.webp",
+   "/mockups/doc-intel-front-2.webp"
+  ],
+  "frontSm": "/mockups/doc-intel-front-sm.webp",
+  "tilt": "/mockups/doc-intel-tilt.webp",
+  "real": true
+ },
+ "anomaly": {
+  "front": [
+   "/mockups/anomaly-front-1.webp"
+  ],
+  "frontSm": "/mockups/anomaly-front-sm.webp",
+  "tilt": "/mockups/anomaly-tilt.webp",
+  "real": true
+ },
+ "leo": {
+  "front": [
+   "/mockups/leo-front-1.webp",
+   "/mockups/leo-front-2.webp"
+  ],
+  "frontSm": "/mockups/leo-front-sm.webp",
+  "tilt": "/mockups/leo-tilt.webp",
+  "real": true
+ },
+ "freelanceflow": {
+  "front": [
+   "/mockups/freelanceflow-front-1.webp"
+  ],
+  "frontSm": "/mockups/freelanceflow-front-sm.webp",
+  "tilt": "/mockups/freelanceflow-tilt.webp",
+  "real": false
+ },
+ "house": {
+  "front": [
+   "/mockups/house-front-1.webp",
+   "/mockups/house-front-2.webp"
+  ],
+  "frontSm": "/mockups/house-front-sm.webp",
+  "tilt": "/mockups/house-tilt.webp",
+  "real": true
+ },
+ "authenticity": {
+  "front": [
+   "/mockups/authenticity-front-1.webp",
+   "/mockups/authenticity-front-2.webp"
+  ],
+  "frontSm": "/mockups/authenticity-front-sm.webp",
+  "tilt": "/mockups/authenticity-tilt.webp",
+  "real": true
+ },
+ "codereview": {
+  "front": [
+   "/mockups/codereview-front-1.webp"
+  ],
+  "frontSm": "/mockups/codereview-front-sm.webp",
+  "tilt": "/mockups/codereview-tilt.webp",
+  "real": false
+ },
+ "rag": {
+  "front": [
+   "/mockups/rag-front-1.webp"
+  ],
+  "frontSm": "/mockups/rag-front-sm.webp",
+  "tilt": "/mockups/rag-tilt.webp",
+  "real": false
+ }
+}
