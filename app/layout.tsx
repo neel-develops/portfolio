@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: { default: SITE.title, template: "%s | Neel Sonawane" },
   description: SITE.metaDescription,
-  applicationName: "Neel Sonawane — Portfolio",
+  applicationName: "Neel Sonawane",
   authors: [{ name: "Neel Sonawane", url: SITE.url }],
   creator: "Neel Sonawane",
   publisher: "Neel Sonawane",

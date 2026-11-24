@@ -83,8 +83,9 @@ export const personLd = () => ({
 export const websiteLd = () => ({
   "@type": "WebSite",
   "@id": SITE_ID,
-  url: SITE.url,
-  name: "Neel Sonawane — Portfolio",
+  url: `${SITE.url}/`,
+  name: "Neel Sonawane",
+  alternateName: ["Neel Sonawane Portfolio", "neel-develops", "NS"],
   description: SITE.description,
   inLanguage: "en-IN",
   publisher: { "@id": PERSON_ID }
