@@ -6,6 +6,7 @@ import { motion, useMotionValueEvent, useScroll, useSpring, useTransform } from 
 import QRCode from "qrcode";
 import { portfolioData as d } from "@/data/portfolio";
 import { projects } from "@/data/projects";
+import { faqItems } from "@/lib/seo";
 
 /* ---------- ID card: liquid-chrome Friday OS card, flips on tap ---------- */
 
@@ -116,14 +117,7 @@ function Capabilities() {
 /* ---------- FAQ ---------- */
 
 function Faq() {
-  const items = [
-    { q: "Who is Neel Sonawane?", a: d.about[0] },
-    { q: "What kind of work do you take on?", a: "AI-powered web apps, automation tools, dashboards and client websites, from a first prototype to a deployed product." },
-    { q: "Which technologies do you work with?", a: "Python, TypeScript, React and Next.js on the front, FastAPI and Node on the back, Postgres and Firebase for data, and Groq, Gemini and Claude for AI." },
-    { q: "What have you built?", a: `${projects.length} projects so far, including MediTwin, LeadPilot, Ledger and two freelance builds. Every one has its own page under Work.` },
-    { q: "What experience do you have?", a: d.experience.slice(0, 3).map((e) => `${e.role} at ${e.company.split(" ·")[0]} (${e.period})`).join("; ") + "." },
-    { q: "Are you available for freelance work?", a: `Yes. I work with the AI & Digital Transformation team at VSQC Pvt. Ltd., and take on freelance AI and full-stack projects alongside. The fastest way to reach me is ${d.contact.email}.` }
-  ];
+  const items = faqItems();
   const [open, setOpen] = useState(0);
   return (
     <div className="ab-faq">

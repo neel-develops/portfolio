@@ -182,14 +182,14 @@ export const portfolioData = {
       scale: "SIH 2026 · PS 26027"
     },
     {
-      title: "Kin — Care Coordination App",
+      title: "Kin — Trusted Caregiver Matching",
       description:
-        "Care coordination project built with the Kin team, a collaboration on GitHub.",
-      tags: ["Collaboration", "Full-stack"],
+        "Smart India Hackathon 2026 team build for families caring for a parent from far away: it matches verified caregivers and only books one after a seven-check trust score (Aadhaar, police verification, face match and more).",
+      tags: ["Trust Score", "Caregiver Matching", "SIH 2026"],
       href: "",
-      role: "Contributor",
-      type: "Team Project",
-      scale: "Collaboration"
+      role: "Developer",
+      type: "Hackathon Project",
+      scale: "Smart India Hackathon 2026"
     },
     {
       title: "RepoMind — GitHub Repository Intelligence",

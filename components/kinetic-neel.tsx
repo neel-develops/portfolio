@@ -75,6 +75,7 @@ export function KineticNeel() {
           <span className="kinetic-letter-inner" style={{ display: "inline-block", position: "relative" }}>{letter}</span>
         </motion.span>
       ))}
+      <span className="sr-only"> Sonawane, AI developer and full-stack builder in Pune</span>
     </motion.h1>
   );
 }
